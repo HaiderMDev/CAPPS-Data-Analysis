@@ -1,2 +1,4 @@
-# CAAT-ver-2.0
-A visual tool for the analysis of ChIPseq and ATAC-seq data in Shiny Dashboard
+# **ChIP-seq and ATAC-seq Analysis Tool (CAAT)**
+
+Tool for the analysis of ATAC-seq and ChIP-seq Datasets in R. 
+
