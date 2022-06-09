@@ -1,0 +1,5 @@
+SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,Peaks,PeakCaller,PeakFormat,ScoreCol,LowerBetter
+C922,Hepatocytes,WT1,WT,None,1,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/C922.bam,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/BEDGRAPH/C922.bed,bed,bed,5,FALSE
+C923,Hepatocytes,WT2,WT,None,2,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/C923.bam,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/BEDGRAPH/C923.bed,bed,bed,5,FALSE
+26DKO,Hepatocytes,KO1,KO,None,1,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/26DKO.bam,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/BEDGRAPH/26DKO.bed,bed,bed,5,FALSE
+960DKO,Hepatocytes,KO2,KO,None,2,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/960DKO.bam,/Users/haiderhassan/Desktop/ATAC-seq_Analysis/BEDGRAPH/960DKO.bed,bed,bed,5,FALSE

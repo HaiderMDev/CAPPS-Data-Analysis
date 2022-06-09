@@ -14,6 +14,7 @@ Pheatmap
 
 ## Table of Contents
 1. [Installation](#installation-and-launching-shiny-dashboard)
+2. [Sample Sheet Preparation](#sample-file-preparation)
 
 &nbsp;
 &nbsp;
