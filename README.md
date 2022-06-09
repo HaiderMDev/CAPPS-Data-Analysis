@@ -5,7 +5,7 @@
 &nbsp;
 
 ## Table of Contents
-1. [Installation](#Installation and Launching Shiny Dashboard**)
+1. [Installation](#Installation and Launching Shiny Dashboard)
 
 &nbsp;
 &nbsp;
@@ -21,7 +21,7 @@ Pheatmap
 ```
 
 
-###**Installation and Launching Shiny Dashboard**
+### **Installation and Launching Shiny Dashboard**
 
 
 ---------------------
