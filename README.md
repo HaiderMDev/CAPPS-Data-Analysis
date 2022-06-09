@@ -21,7 +21,7 @@ The **app.R** can be downloaded and opened in R-studios. Please download the **_
 &nbsp;
 &ensp;
 
-**Run shiny dashboard through terminal**
+###**Run shiny dashboard through terminal**
 
 1. Open Terminal and maneuver to the directory containing the `Required_Packages.R` and `app.R` files. Type the following command:
 
@@ -42,7 +42,7 @@ The **app.R** can be downloaded and opened in R-studios. Please download the **_
 
 **_A docker container will be available soon for easy installation and running of the software_**
 
-nbsp;
+&nbsp;
 &ensp;
 &nbsp;
 &ensp;
