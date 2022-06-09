@@ -4,8 +4,8 @@
 &nbsp;
 &nbsp;
 
-### Table of Contents
-[Installation](#installation)
+## Table of Contents
+[Installation](#installation-and-running-the-application)
 
 &nbsp;
 &nbsp;
@@ -21,8 +21,9 @@ Pheatmap
 ```
 
 
-### **Installation**
-#installation
+### **Installation and Running the Applicaiton**
+#installation-and-running-the-application
+
 ---------------------
 The **app.R** can be downloaded and opened in R-studios. Please download the **_Required_Packages.R_** file and run it, which will attempt to automatically install the required packages. 
 
