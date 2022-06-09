@@ -5,7 +5,7 @@
 &nbsp;
 
 ## Table of Contents
-[Installation](#installation-and-running-the-application)
+1. [Installation](#Installation and Launching Shiny Dashboard**)
 
 &nbsp;
 &nbsp;
@@ -21,8 +21,8 @@ Pheatmap
 ```
 
 
-### **Installation and Running the Applicaiton**
-#installation-and-running-the-application
+###**Installation and Launching Shiny Dashboard**
+
 
 ---------------------
 The **app.R** can be downloaded and opened in R-studios. Please download the **_Required_Packages.R_** file and run it, which will attempt to automatically install the required packages. 
