@@ -9,5 +9,5 @@ This is a program for the analysis of ATAC-seq or ChIP-seq data in R. This packa
 -Pheatmap 
 
 ```
--
-#### **Installation**
+---------------------
+### **Installation**
