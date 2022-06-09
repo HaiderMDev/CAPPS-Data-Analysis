@@ -16,12 +16,12 @@ The **app.R** can be downloaded and opened in R-studios. Please download the **_
 
 >  Ensure you have R version 4.1.2 or higher for compatibility. 
 
-
-
-
+&nbsp;
+&nbsp;
+&nbsp;
 **Run shiny dashboard through terminal**
 
-1. ####Open Terminal and maneuver to the directory containing the 'Required_Packages.R' and 'app.R' files. Type the following command:
+1. ####Open Terminal and maneuver to the directory containing the `Required_Packages.R` and `app.R` files. Type the following command:
 
 > R < Required_Packages.R --no-save
 
