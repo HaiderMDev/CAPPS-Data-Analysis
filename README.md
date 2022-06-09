@@ -1,4 +1,8 @@
 # **ChIP-seq and ATAC-seq Analysis Tool (CAAT)**
 
-Tool for the analysis of ATAC-seq and ChIP-seq Datasets in R. 
+This is a program for the analysis of ATAC-seq or ChIP-seq data in R. This package incorporates the following packages:
+```
+DiffBind
+ChIPseeker
+
 
