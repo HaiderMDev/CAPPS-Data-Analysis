@@ -16,16 +16,17 @@ The **app.R** can be downloaded and opened in R-studios. Please download the **_
 
 >  Ensure you have R version 4.1.2 or higher for compatibility. 
 
-**Run the applicaiton in terminal**
--Open Terminal and maneuver to the directory containing the **_Required_Packages.R_** and **_app.R_** files. Type the following command:
+**Run shiny dashboard through terminal**
+
+1. Open Terminal and maneuver to the directory containing the 'Required_Packages.R' and 'app.R' files. Type the following command:
 
 > R < Required_Packages.R --no-save
 
--Wait for the installation of required packages to complete. Then type the following command in the terminal:
+2. Wait for the installation of required packages to complete. Then type the following command in the terminal:
 
 > Rscript -e 'library(methods); shiny::runApp("app.R", launch.browser = TRUE)'
 
--This should launch the shiny dashboard app in the browser. 
+3. This should launch the shiny dashboard app in the browser. 
 
 **_A docker container will be available soon for easy installation and running of the software_**
 
