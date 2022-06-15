@@ -950,6 +950,7 @@ ui <- dashboardPage(
                             tags$h4("Please cite this software in your publication. If any questions, please contact me at hhassan4242@gmail.com. Thank you!"),
                             #HTML('</div>'),          #
                             HTML('</p></div>')
+                           ),
 
                    
                    #Java script for recording mouse input into list_tabs
