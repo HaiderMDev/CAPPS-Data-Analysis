@@ -450,7 +450,6 @@ ui <- dashboardPage(
                                   #HTML('</p></div>')
                                     ),
                          tabPanel(title="Advanced Settings",id="Tab2",value="Tab2",
-                                  #HTML('<div style="padding:10px 10px 10px 10px;"><p>'),
                                   tags$h3("Differential Peak Analysis Settings"),
                                   tags$hr(),
                                   tags$h4("NOTE: If changes are made to these settings, all data analysis will automaticaly re-start. Do not leave any spaces."),
@@ -460,21 +459,22 @@ ui <- dashboardPage(
                                   textInput("Summits",label=h5("Summits"),width="500",value="100",placeholder="Type a number for summits..."),
                                   textInput("TH",label=h5("Select a value for FDR (0.05 - 1)"),width="300",value="1",placeholder="Type a number for FDR..."),
                                   textInput("bCounts",label=h5("bCounts Setting (TRUE/FALSE)"),width="300",value="TRUE",placeholder="TRUE"),
-                                  #HTML('</p></div>')
                                  )
                                ),HTML('</p></div>')
                               ), 
                             
                    #Page where diffbind datatable output is viewed         
                    tabPanel(title = "Tab3", id = "Tab3", value = "Tab3",
-                     #url for diffbind and chipseeker
-                      url_diffbind <- a("Diffbind Resource", href="https://bioconductor.org/packages/devel/bioc/vignettes/DiffBind/inst/doc/DiffBind.pdf"),
-                      url_chipseeker <- a("ChIPseeker Resource", href="https://bioconductor.org/packages/release/bioc/manuals/ChIPseeker/man/ChIPseeker.pdf"),
+                      HTML('<div style="padding:10px 10px 10px 10px;"><p>'),
                       tags$h3("Differential Peak Analysis"),
                       tags$h5("This uses DiffBind package and ChIPseeker to perform differential accessibility and peak annotation, respectively."),
                       tags$hr(),
-                      tags$h5("The user manual for diffbind can be downloaded by clicking the link here:",url_diffbind),
-                      tags$h5("The user manual for ChIPseeker can be downloaded by clicking the link here:",url_chipseeker),
+                      tags$h5("The user manual for diffbind can be downloaded by clicking the link here:",
+                                                                                          a("Diffbind Resource", 
+                                                                                            href="https://bioconductor.org/packages/devel/bioc/vignettes/DiffBind/inst/doc/DiffBind.pdf")),
+                      tags$h5("The user manual for ChIPseeker can be downloaded by clicking the link here:",
+                                                                                          a("ChIPseeker Resource", 
+                                                                                            href="https://bioconductor.org/packages/release/bioc/manuals/ChIPseeker/man/ChIPseeker.pdf")),
                       tags$br(),
                       tags$h4("Basic Summary:"),
                       p(h5("Total number of differentially enriched peaks:"), h5(textOutput(outputId="Number_of_genes",inline=TRUE)), style = "color:red"),
@@ -483,8 +483,8 @@ ui <- dashboardPage(
                       p(h5("The number of peaks that pass p-value cut-off of 0.05:"), h5(textOutput(outputId="pvalue",inline=TRUE))),
                       p(h5("The number of peaks that pass FDR cut-off of 0.2:"), h5(textOutput(outputId="FDR",inline=TRUE))),
                       p(h5("The number of peaks that pass p-value cut-off of 0.05 and FDR cut-off of 0.2:"), h5(textOutput(outputId="FDR_p_value",inline=TRUE))),
-                      #HTML('</p></div>')
-                              ),
+                      HTML('</p></div>')
+                           ),
                    
                    #Panel for PCA, Heatmap, MA and Volcano plots
                    tabPanel(title = "Tab4", id = "Tab4", value = "Tab4",
@@ -674,19 +674,19 @@ ui <- dashboardPage(
                                           tags$hr(),
                                           fluidRow(width=40,
                                           dropdown(label = "Box Plot",
-                                                  selectInput("LOST_GSE_dpi", label = "Output dpi", width = "95",
-                                                              choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
-                                                              selected = 48),
-                                                  downloadButton("saveLOST_CNEpng", "PNG"),
-                                                  HTML('<br><br>'), #<br> creates breaks and moves item to next line
-                                                  downloadButton("saveLOST_CNEjpg", "JPG"),
-                                                  HTML('<br><br>'),
-                                                  downloadButton("saveLOST_CNEpdf", "PDF"),
-                                                  HTML('<br><br>'),
-                                                  downloadButton("saveLOST_CNEtiff", "TIFF"),
-                                                  size = "default",
-                                                  icon = icon("download", class = ""), 
-                                                  up = FALSE),
+                                            selectInput("LOST_GSE_dpi", label = "Output dpi", width = "95",
+                                                        choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                        selected = 48),
+                                            downloadButton("saveLOST_CNEpng", "PNG"),
+                                            HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                            downloadButton("saveLOST_CNEjpg", "JPG"),
+                                            HTML('<br><br>'),
+                                            downloadButton("saveLOST_CNEpdf", "PDF"),
+                                            HTML('<br><br>'),
+                                            downloadButton("saveLOST_CNEtiff", "TIFF"),
+                                            size = "default",
+                                            icon = icon("download", class = ""), 
+                                            up = FALSE),
                                           HTML('</p>'),
                                           jqui_resizable(
                                              plotOutput("LOST_GSE_plot", height = "250", width = "360"),
