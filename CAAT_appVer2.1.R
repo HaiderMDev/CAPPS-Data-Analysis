@@ -1,44 +1,6 @@
 
 app_name    = " CAAT " 
-app_version = "Version 2.0 "
-
-#Install packages if not installed
-installReqs <- function(package_name, bioc) {
-    if (requireNamespace(package_name, quietly = TRUE) == FALSE) {
-        if (bioc == FALSE)
-            install.packages(package_name)
-        else if (bioc == TRUE) #install using Bioconductor package manager
-            BiocManager::install(package_name)
-    }
-}
-
-#install and upload packages:
-#check if required libraries are installed, and install them if needed
-installReqs("BiocManager", bioc = FALSE)
-installReqs("shiny", bioc = TRUE)
-installReqs("shinydashboard", bioc = TRUE)
-installReqs("DT", bioc = TRUE)
-installReqs("tidyverse", bioc = TRUE)
-installReqs("DiffBind", bioc = TRUE)
-installReqs("DESeq2", bioc = TRUE)
-installReqs("edgeR", bioc = TRUE)
-installReqs("shinyjqui", bioc = TRUE)
-installReqs("shinyWidgets", bioc = TRUE)
-installReqs("shinycssloaders", bioc = TRUE)
-installReqs("circlize", bioc = TRUE)
-installReqs("ChIPseeker", bioc = TRUE)
-installReqs("org.Hs.eg.db", bioc = TRUE)
-installReqs("org.Mm.eg.db", bioc = TRUE)
-installReqs("TxDb.Mmusculus.UCSC.mm10.knownGene", bioc = TRUE)
-installReqs("TxDb.Hsapiens.UCSC.hg19.knownGene", bioc = TRUE)
-installReqs("pheatmap", bioc = TRUE)
-installReqs("RColorBrewer", bioc = TRUE)
-installReqs("clusterProfiler", bioc = TRUE)
-installReqs("pheatmap", bioc = TRUE)
-installReqs("reshape", bioc = TRUE)
-installReqs("ggplot2", bioc = TRUE)
-installReqs("colourpicker", bioc = TRUE)
-installReqs("shinyFiles", bioc = TRUE)
+app_version = "Version 2.1 "
 
 #Loading packages:
 library(shiny)
@@ -68,6 +30,8 @@ library(shinyWidgets)
 library(shinyjs)
 library(colourpicker)
 library(shinyFiles)
+library(ggupset)
+
 
 ################# #################### #################### UI COMPONENT #################### #################### ####################
 ui <- dashboardPage(
@@ -206,7 +170,7 @@ ui <- dashboardPage(
                               tags$br()),
                            )
                           )
-                        ),
+                         ),
          
          #Conditonal panel for gene annotation plots
          conditionalPanel(condition = "input.program == 'Tab5'",
@@ -284,7 +248,7 @@ ui <- dashboardPage(
                   div(id='positive',
                      tags$br(),  #introduces space
                      tags$div('class'="center",
-                         h4(HTML('<br><br><b> Controls on Previous Page </b>'))
+                         h4(HTML('<br><br><b> Settings on Previous Page </b>'))
                                  )
                                 )
                                ),
@@ -677,71 +641,228 @@ ui <- dashboardPage(
                    #Panel for Pathways Analysis
                    tabPanel(title = "Tab6", id = "Tab6", value = "Tab6",
                       HTML('<div style="padding:5px 5px 5px 20px;"<p>'),
-                      tabsetPanel(id="pathways",
-                         tabPanel(title = "Negative Fold Change", id = "Tab1", value = "Tab1",
-                            tags$h3("Gene Annotation Without FDR Correction"),
-                            tags$hr(),
-                            fluidRow(width=40,
-                               dropdown(label = "Negative Fold Change",
-                                   selectInput("LOST_dpi", label = "Output dpi", width = "95",
-                                               choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
-                                               selected = 48),
-                                   downloadButton("saveLOSTpng", "PNG"),
-                                   HTML('<br><br>'), #<br> creates breaks and moves item to next line
-                                   downloadButton("saveLOSTjpg", "JPG"),
-                                   HTML('<br><br>'),
-                                   downloadButton("saveLOSTpdf", "PDF"),
-                                   HTML('<br><br>'),
-                                   downloadButton("saveLOSTtiff", "TIFF"),
-                                   size = "default",
-                                   icon = icon("download", class = ""), 
-                                   up = FALSE),
-                               HTML('</p>'),
-                               jqui_resizable(
-                                  plotOutput("LOST_plot", height = "250", width = "360"),
+                         tabsetPanel(id="pathways",
+                           #Plots for Negative FC     
+                            tabPanel(title = "Negative Fold Change", id = "Tab1", value = "Tab1",
+                              tabsetPanel(id="negativeFC",
+                                 tabPanel(title = "Box Plot", id = "Tab1", value = "Tab1",
+                                     tags$h3("Dot Plot"),
+                                     tags$hr(),
+                                     fluidRow(width=40,
+                                        dropdown(label = "Box Plot",
+                                            selectInput("LOST_dpi", label = "Output dpi", width = "95",
+                                                        choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                        selected = 48),
+                                            downloadButton("saveLOSTpng", "PNG"),
+                                            HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                            downloadButton("saveLOSTjpg", "JPG"),
+                                            HTML('<br><br>'),
+                                            downloadButton("saveLOSTpdf", "PDF"),
+                                            HTML('<br><br>'),
+                                            downloadButton("saveLOSTtiff", "TIFF"),
+                                            size = "default",
+                                            icon = icon("download", class = ""), 
+                                            up = FALSE),
+                                        HTML('</p>'),
+                                        jqui_resizable(
+                                           plotOutput("LOST_plot", height = "250", width = "360"),
+                                                      )
+                                                     )
+                                                    ),
+                                 tabPanel(title = "CNET Plot", id = "Tab2", value = "Tab2",
+                                          tags$h3("CNET Plot"),
+                                          tags$hr(),
+                                          fluidRow(width=40,
+                                          dropdown(label = "Box Plot",
+                                                  selectInput("LOST_GSE_dpi", label = "Output dpi", width = "95",
+                                                              choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                              selected = 48),
+                                                  downloadButton("saveLOST_CNEpng", "PNG"),
+                                                  HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                                  downloadButton("saveLOST_CNEjpg", "JPG"),
+                                                  HTML('<br><br>'),
+                                                  downloadButton("saveLOST_CNEpdf", "PDF"),
+                                                  HTML('<br><br>'),
+                                                  downloadButton("saveLOST_CNEtiff", "TIFF"),
+                                                  size = "default",
+                                                  icon = icon("download", class = ""), 
+                                                  up = FALSE),
+                                          HTML('</p>'),
+                                          jqui_resizable(
+                                             plotOutput("LOST_GSE_plot", height = "250", width = "360"),
+                                                      )
+                                                     )
+                                                    ),
+                                 tabPanel(title = "Bar Plot", id = "Tab2", value = "Tab2",
+                                    tags$h3("BAR Plot"),
+                                    tags$hr(),
+                                    fluidRow(width=40,
+                                       dropdown(label = "Box Plot",
+                                          selectInput("LOST_Bar_dpi", label = "Output dpi", width = "95",
+                                                      choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                      selected = 48),
+                                          downloadButton("saveLOST_Barpng", "PNG"),
+                                          HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                          downloadButton("saveLOST_Barjpg", "JPG"),
+                                          HTML('<br><br>'),
+                                          downloadButton("saveLOST_Barpdf", "PDF"),
+                                          HTML('<br><br>'),
+                                          downloadButton("saveLOST_Bartiff", "TIFF"),
+                                          size = "default",
+                                          icon = icon("download", class = ""), 
+                                          up = FALSE),
+                                       HTML('</p>'),
+                                       jqui_resizable(
+                                          plotOutput("LOST_Bar_plot", height = "250", width = "360"),
                                              )
                                             )
                                            ),
-                            tabPanel(title = "Positive Fold Change", id = "Tab2", value = "Tab2",
-                               tags$h3("Pathways Analysis"),
-                               tags$hr(),
-                               fluidRow(width=40,
-                                  dropdown(label = "Positive Fold Change",
-                                     selectInput("GAIN_dpi", label = "Output dpi", width = "95",
-                                                 choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
-                                                 selected = 48),
-                                     downloadButton("saveGAINpng", "PNG"),
-                                     HTML('<br><br>'), #<br> creates breaks and moves item to next line
-                                     downloadButton("saveGAINjpg", "JPG"),
-                                     HTML('<br><br>'),
-                                     downloadButton("saveGAINpdf", "PDF"),
-                                     HTML('<br><br>'),
-                                     downloadButton("saveGAINtiff", "TIFF"),
-                                     size = "default",
-                                     icon = icon("download", class = ""), 
-                                     up = FALSE),
-                                  HTML('</p>'),
-                                  jqui_resizable(
-                                     plotOutput("GAIN_plot", height = "250", width = "360"),
+                                 tabPanel(title = "Heat Plot", id = "Tab2", value = "Tab2",
+                                          tags$h3("Heat Plot"),
+                                          tags$hr(),
+                                          fluidRow(width=40,
+                                             dropdown(label = "Box Plot",
+                                                selectInput("LOST_Heat_dpi", label = "Output dpi", width = "95",
+                                                            choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                            selected = 48),
+                                                downloadButton("saveLOST_Heatpng", "PNG"),
+                                                HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                                downloadButton("saveLOST_Heatjpg", "JPG"),
+                                                HTML('<br><br>'),
+                                                downloadButton("saveLOST_Heatpdf", "PDF"),
+                                                HTML('<br><br>'),
+                                                downloadButton("saveLOST_Heattiff", "TIFF"),
+                                                size = "default",
+                                                icon = icon("download", class = ""), 
+                                                up = FALSE),
+                                             HTML('</p>'),
+                                             jqui_resizable(
+                                                plotOutput("LOST_Heat_plot", height = "250", width = "360"),
+                                                   )
+                                                  )
+                                                 )
                                                 )
-                                               )
-                                              ),
-                            tabPanel(title="Help",id="Tab3",value="Tab3",
-                                     tags$h2("Help Page"),
-                                     tags$hr(),
-                                     tags$h4("General Guidelines"),
-                                     tags$h5("The graph on the left and right represent pathways analysis for regions undergoing a negative and positive fold change relative to the control group, respectively."),
-                                     tags$h5("The peaks were annotated using the ChIPseeker package and pathways analysis can be performed using the KEGG or REACTOME databases."),
-                                     tags$br(),
-                                     tags$h4("For ATAC-seq:"),
-                                     tags$h5("For ATAC-seq analysis, the negative and positive fold change cannotates regions that are losing or gaining  accessibiility relative to the contorl group, respectively."),
-                                     tags$br(),
-                                     tags$h4("For ChIP-seq:"),
-                                     tags$h5("For ChIP-seq analysis, the negative and positive fold changes cannotates a decrease or increase in peak enrichment relative to the control group, respectively."),
-                                     tags$br()          
-                                        )
-                                       ),HTML('</p></div>')
-                                      ),
+                                               ),
+                              #Plots for positive FC
+                               tabPanel(title = "Positive Fold Change", id = "Tab2", value = "Tab2",
+                                  tabsetPanel(id="positive_FC",
+                                       tabPanel(title = "Box Plot", id = "Tab1", value = "Tab1",
+                                        tags$h3("Box Plot"),
+                                        tags$hr(),
+                                        fluidRow(width=40,
+                                           dropdown(label = "Download Box Plot",
+                                              selectInput("GAIN_dpi", label = "Output dpi", width = "95",
+                                                          choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                          selected = 48),
+                                              downloadButton("saveGAINpng", "PNG"),
+                                              HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                              downloadButton("saveGAINjpg", "JPG"),
+                                              HTML('<br><br>'),
+                                              downloadButton("saveGAINpdf", "PDF"),
+                                              HTML('<br><br>'),
+                                              downloadButton("saveGAINtiff", "TIFF"),
+                                              size = "default",
+                                              icon = icon("download", class = ""), 
+                                              up = FALSE),
+                                           HTML('</p>'),
+                                           jqui_resizable(
+                                              plotOutput("GAIN_plot", height = "250", width = "360"),
+                                                         )
+                                                        )
+                                                       ),
+                                       tabPanel(title = "CNET Plot", id = "Tab2", value = "Tab2",
+                                          tags$h3("CNET Plot"),
+                                          tags$hr(),
+                                          fluidRow(width=40,
+                                             dropdown(label = "Download GSEA",
+                                                selectInput("GAIN_GSE_dpi", label = "Output dpi", width = "95",
+                                                            choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                            selected = 48),
+                                                downloadButton("saveGAIN_GSEpng", "PNG"),
+                                                HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                                downloadButton("saveGAIN_GSEjpg", "JPG"),
+                                                HTML('<br><br>'),
+                                                downloadButton("saveGAIN_GSEpdf", "PDF"),
+                                                HTML('<br><br>'),
+                                                downloadButton("saveGAIN_GSEtiff", "TIFF"),
+                                                size = "default",
+                                                icon = icon("download", class = ""), 
+                                                up = FALSE),
+                                             HTML('</p>'),
+                                             jqui_resizable(
+                                                      plotOutput("GAIN_GSE_plot", height = "250", width = "360"),
+                                                         )
+                                                        )
+                                                       ),
+                                       tabPanel(title = "Bar Plot", id = "Tab3", value = "Tab3",
+                                          tags$h3("BAR Plot"),
+                                          tags$hr(),
+                                          fluidRow(width=40,
+                                             dropdown(label = "Box Plot",
+                                                selectInput("GAIN_Bar_dpi", label = "Output dpi", width = "95",
+                                                            choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                            selected = 48),
+                                                downloadButton("saveGAIN_Barpng", "PNG"),
+                                                HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                                downloadButton("saveGAIN_Barjpg", "JPG"),
+                                                HTML('<br><br>'),
+                                                downloadButton("saveGAIN_Barpdf", "PDF"),
+                                                HTML('<br><br>'),
+                                                downloadButton("saveGAIN_Bartiff", "TIFF"),
+                                                size = "default",
+                                                icon = icon("download", class = ""), 
+                                                up = FALSE),
+                                              HTML('</p>'),
+                                             jqui_resizable(
+                                             plotOutput("GAIN_Bar_plot", height = "250", width = "360"),
+                                                   )
+                                                  )
+                                                 ),
+                                       tabPanel(title = "Heat Plot", id = "Tab4", value = "Tab4",
+                                          tags$h3("Heat Plot"),
+                                          tags$hr(),
+                                          fluidRow(width=40,
+                                             dropdown(label = "Box Plot",
+                                                   selectInput("GAIN_Heat_dpi", label = "Output dpi", width = "95",
+                                                               choices = list("24 dpi" = 24, "48 dpi" = 48, "96 dpi" = 96, "192 dpi" = 192),
+                                                               selected = 48),
+                                                   downloadButton("saveGAIN_Heatpng", "PNG"),
+                                                   HTML('<br><br>'), #<br> creates breaks and moves item to next line
+                                                   downloadButton("saveGAIN_Heatjpg", "JPG"),
+                                                   HTML('<br><br>'),
+                                                   downloadButton("saveGAIN_Heatpdf", "PDF"),
+                                                   HTML('<br><br>'),
+                                                   downloadButton("saveGAIN_Heattiff", "TIFF"),
+                                                   size = "default",
+                                                   icon = icon("download", class = ""), 
+                                                   up = FALSE),
+                                                HTML('</p>'),
+                                                jqui_resizable(
+                                                   plotOutput("GAIN_Heat_plot", height = "250", width = "360"),
+                                                         )
+                                                        )
+                                                       )
+                                                      )
+                                                     ),
+                            
+                               tabPanel(title="Help",id="Tab3",value="Tab3",
+                                        tags$h2("Help Page"),
+                                        tags$hr(),
+                                        tags$h4("General Guidelines"),
+                                        tags$h5("The graph on the left and right represent pathways analysis for regions undergoing a negative and positive fold change relative to the control group, respectively."),
+                                        tags$h5("The peaks were annotated using the ChIPseeker package and pathways analysis can be performed using the KEGG or REACTOME databases."),
+                                        tags$br(),
+                                        tags$h4(HTML('<b>For ATAC-seq:</b>'),
+                                        tags$h5("For ATAC-seq analysis, the negative and positive fold change cannotates regions that are losing or gaining  accessibiility relative to the contorl group, respectively."),
+                                        tags$br(),
+                                        tags$h4(HTML('<b>For ChIP-seq:</b>'),
+                                        tags$h5("For ChIP-seq analysis, the negative and positive fold changes cannotates a decrease or increase in peak enrichment relative to the control group, respectively."),
+                                        tags$br()          
+                                           )
+                                          )
+                                         )
+                                        ),HTML('</p></div>')
+                                       ),
                    
                    #Panel for heatmap panel
                    tabPanel(title = "Tab7", id = "Tab7", value = "Tab7",
@@ -829,32 +950,7 @@ ui <- dashboardPage(
                             tags$h4("Please cite this software in your publication. If any questions, please contact me at hhassan4242@gmail.com. Thank you!"),
                             #HTML('</div>'),          #
                             HTML('</p></div>')
-                                            ),
-                   #---------- PAGE TO FETCH DIRECTORIES ----------#
-                  # tabPanel(title="Tab10", id="Tab10", value="Tab10",
-                   #         HTML('<div style="padding:5px 5px 5px 5px;"><p>'),
-                     #       tags$h1("Sample Sheet Formation"),
-                    #        tags$hr(),
-                  #          tags$br(),
-                   #         fluidRow(column(width=1,
-                    #                    h5(HTML('<b>SampleID</b>')),
-                  #                  textInput("Sample1",label=h6(""),width="70",value="",placeholder="C1"),
-                     #                  textInput("Sample2",label=h6(""),width="70",value="",placeholder="C1"),
-                      #                  textInput("Sample3",label=h6(""),width="70",value="",placeholder="C1"),
-                       #                 textInput("Sample4",label=h6(""),width="70",value="",placeholder="C1"),
-                                  #   ),
-                                     
-                               #      column(width=1,
-                                #         h5(HTML('<b>BAM READS</b>')),
-                                 #        textOutput(outpudId=test, ),
-                                  #       shinyFilesButton('BAM1', 'File select', 'Please select a file', FALSE),
-                                   #      verbatimTextOutput("filechosen")
-                                    # ),
-                                     #column(width=1,
-                                      #      h5(HTML('<b>BED READS</b>')),
-                                     #)
-                                     #),HTML('</p></div>')
-                                      #      ),
+
                    
                    #Java script for recording mouse input into list_tabs
                    tags$script("
@@ -892,21 +988,7 @@ shinyServer <- function(input, output, session) {
     }
    )
    
-   
-   #---------- FUNCTION TO FETCH DIRECTORIES ----------#
-   #shinyFileChoose(input, 'BAM1', root = c(root = '/Users/'),          
-    #               filetypes = c('', "bam"))
-   
-   #file <- reactive(input$files)
-   #output$filechosen <- renderText({
-      #as.character(parseFilePaths(c(home = "/home/guest/test_data"),file())$datapath)
-      # Either is fine
-      # parseFilePaths(c(home = "/home/guest/test_data"),file())$datapath,stringAsFactors=F)
-   #})
-   
-#}   
-   #---------- FUNCTION TO FETCH DIRECTORIES ----------#
-   
+
    
    #---------- Render UI for Experimental Settings ----------#
    #Get BAM file information from samplesheet:
@@ -1230,7 +1312,7 @@ shinyServer <- function(input, output, session) {
                                qvalueCutoff = 0.2, 
                                readable = TRUE)
            }
-       }
+          }
        #return the ego
        return(ego)
       }
@@ -1253,21 +1335,19 @@ shinyServer <- function(input, output, session) {
        #do GO analysis based upon USER input:
        #1: human
        #2: mouse 
-       sort_gene_list <-sort(entrezids,decreasing=TRUE)
-       
        if (input$ref_genome_organism == 1) {
            if (input$KEGGorREACTOME == "KEGG") {
                ego <- enrichKEGG(gene = entrezids,
                                  organism = 'hg',
                                  pvalueCutoff = 0.2)
            } else if (input$KEGGorREACTOME == "REACTOME") {
-               ego <- enrichGO(gene = entrezids, 
-                               keyType = "ENTREZID", 
-                               OrgDb = org.Hs.eg.db, 
-                               ont = "BP", 
-                               pAdjustMethod = "BH", 
-                               qvalueCutoff = 0.2, 
-                               readable = TRUE)
+              ego <- enrichGO(gene = entrezids, 
+                              keyType = "ENTREZID", 
+                              OrgDb = org.Hs.eg.db, 
+                              ont = "BP", 
+                              pAdjustMethod = "BH", 
+                              qvalueCutoff = 0.2, 
+                              readable = TRUE)
            }
        } else if (input$ref_genome_organism == 2) {
            if (input$KEGGorREACTOME == "KEGG") {
@@ -1286,7 +1366,7 @@ shinyServer <- function(input, output, session) {
           }
        #return the ego
        return(ego)
-   }
+    }
    )
    #Convert ego to table
    LossPath_Table <- reactive ({
@@ -1295,21 +1375,8 @@ shinyServer <- function(input, output, session) {
        return(cluster_summary)
    }
    )
-   
-   #Datatables for GSEA and CNE plot
-   gain_path_GSEA_CNE <- reactive ({
-      filter_table <- FDR_filter_PATH()
-      filter_table_gain <- filter_table[which(filter_table$Fold > 0),]
-      #select entrez ID:
-      entrezids <- filter_table_gain$geneId %>% 
-         as.character() %>% 
-         unique()
-      #do GO analysis based upon USER input:
-      #1: human
-      #2: mouse 
-      
-   })
-   
+
+  
    ######GETTING FOLD CHANGES FOR INPUT GENES ADDED TO INPUT##########
    #Processing input added to textAreaInput
    genesselect <- reactive ({
@@ -1564,8 +1631,66 @@ shinyServer <- function(input, output, session) {
        dotplot(ego, showCategory = strtoi(input$DisplayNumber))
    }
    )
+   #GSE plot for regions GAINING accessibility:
+   output$GAIN_GSE_plot <- renderPlot({
+      withProgress(message = 'Performing Pathways Analysis ...', value=1, min=1,max=100, {
+         do_GAIN_GSE_Pathways()
+      }
+      )
+   }
+   )
+   do_GAIN_GSE_Pathways <- reactive ({
+      ego <- gain_path()
+      total_steps  = 3
+      current_step = 1
+      current_step = current_step + 1
+      incProgress(current_step/total_steps*100,
+                  detail = paste("Generating pathways analysis plot"))
+      #plot the GO pathway analysis:
+      goplot(ego, showCategory = strtoi(input$DisplayNumber))
+   }
+   )
+   output$GAIN_Bar_plot <- renderPlot({
+      withProgress(message = 'Performing Pathways Analysis ...', value=1, min=1,max=100, {
+         do_GAIN_Bar_Pathways()
+      }
+      )
+   }
+   )
+   do_GAIN_Bar_Pathways <- reactive ({
+      ego <- gain_path()
+      total_steps  = 3
+      current_step = 1
+      current_step = current_step + 1
+      incProgress(current_step/total_steps*100,
+                  detail = paste("Generating pathways analysis plot"))
+      #plot the GO pathway analysis:
+      barplot(ego, showCategory = strtoi(input$DisplayNumber))
+   }
+   )
    
-   #Pathways analysis plot for regions LOSING accessibility (KEGG):
+   #Heat plot for regions LOSING accessibility:
+   output$GAIN_Heat_plot <- renderPlot({
+      withProgress(message = 'Performing Pathways Analysis ...', value=1, min=1,max=100, {
+         do_GAIN_Heat_Pathways()
+      }
+      )
+   }
+   )
+   do_GAIN_Heat_Pathways <- reactive ({
+      ego <- gain_path()
+      total_steps  = 3
+      current_step = 1
+      current_step = current_step + 1
+      incProgress(current_step/total_steps*100,
+                  detail = paste("Generating pathways analysis plot"))
+      #plot the GO pathway analysis:
+      heatplot(ego, showCategory = strtoi(input$DisplayNumber))
+   }
+   )
+   
+   
+   #Pathways analysis plot for regions LOSING accessibility:
    output$LOST_plot <- renderPlot({
        withProgress(message = 'Performing Pathways Analysis ...', value=1, min=1,max=100, {
            do_LOST_Pathways()
@@ -1582,6 +1707,64 @@ shinyServer <- function(input, output, session) {
        incProgress(current_step/total_steps*100,
                    detail = paste("Generating pathways analysis plot"))
        dotplot(ego, showCategory=strtoi(input$DisplayNumber))
+   }
+   )
+   #CNE plot for regions LOSING accessibility:
+   output$LOST_GSE_plot <- renderPlot({
+      withProgress(message = 'Performing Pathways Analysis ...', value=1, min=1,max=100, {
+         do_LOSS_GSE_Pathways()
+      }
+      )
+   }
+   )
+   do_LOSS_GSE_Pathways <- reactive ({
+      ego <- lost_path()
+      total_steps  = 3
+      current_step = 1
+      current_step = current_step + 1
+      incProgress(current_step/total_steps*100,
+                  detail = paste("Generating pathways analysis plot"))
+      #plot the GO pathway analysis:
+      goplot(ego, showCategory = strtoi(input$DisplayNumber))
+   }
+   )
+   #BAR plot for regions LOSING accessibility:
+   output$LOST_Bar_plot <- renderPlot({
+      withProgress(message = 'Performing Pathways Analysis ...', value=1, min=1,max=100, {
+         do_LOSS_Bar_Pathways()
+      }
+      )
+   }
+   )
+   do_LOSS_Bar_Pathways <- reactive ({
+      ego <- lost_path()
+      total_steps  = 3
+      current_step = 1
+      current_step = current_step + 1
+      incProgress(current_step/total_steps*100,
+                  detail = paste("Generating pathways analysis plot"))
+      #plot the GO pathway analysis:
+      barplot(ego, showCategory = strtoi(input$DisplayNumber))
+   }
+   )
+   
+   #Heat plot for regions LOSING accessibility:
+   output$LOST_Heat_plot <- renderPlot({
+      withProgress(message = 'Performing Pathways Analysis ...', value=1, min=1,max=100, {
+         do_LOSS_Heat_Pathways()
+      }
+      )
+   }
+   )
+   do_LOSS_Heat_Pathways <- reactive ({
+      ego <- lost_path()
+      total_steps  = 3
+      current_step = 1
+      current_step = current_step + 1
+      incProgress(current_step/total_steps*100,
+                  detail = paste("Generating pathways analysis plot"))
+      #plot the GO pathway analysis:
+      heatplot(ego, showCategory = strtoi(input$DisplayNumber))
    }
    )
    
@@ -1688,6 +1871,8 @@ shinyServer <- function(input, output, session) {
        g2
    }
    )
+   
+   
    
    #------------------ DT DATA TABLES VISUALIZATION ----------------- #
    #Visualizing the data table in the dashboard body. I 
