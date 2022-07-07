@@ -1,6 +1,6 @@
 
-app_name    = " CAAT " 
-app_version = "Version 2.1 "
+app_name    = " CAPPS-DATA Analysis " 
+app_version = "Version 2.1"
 
 #Loading packages:
 library(shiny)
@@ -73,8 +73,8 @@ ui <- dashboardPage(
                div(id = 'samplesheet page',
                    tags$div('class' = "center",
                    tags$br(),
-                   h3(HTML('<b>C</b>hIP-seq and <b>A</b>TAC-seq <b>A</b>nalysis <b>T</b>ool')),
-                   h5(HTML('<br><b>CAAT</b> is a tool designed for the visual analysis of <b>Ch</b>romatin <b>I</b>mmunopreci<b>P</b>itation <b>seq</b>uencing (ChIP-seq) \
+                   h3(HTML('<b>C</b>hIP-seq and <b>A</b>TAC-seq <b>P</b>eak calling and <b>P</b>rocessing <b>S</b>oftware')),
+                   h5(HTML('<br><b>CAPPS</b> - <b>Data Analysis</b> is a tool designed for the visual analysis of <b>Ch</b>romatin <b>I</b>mmunopreci<b>P</b>itation <b>seq</b>uencing (ChIP-seq) \
                               and <b>A</b>ssay for <b>T</b>ransposase <b>A</b>ccessible <b>C</b>hromatin <b>seq</b>uencing (ATAC-seq). This tool utilizes the DiffBind and \
                               ChIPseeker packages for differential peak analysis and peak annotation, respectively.')),
                    h4(HTML('<br><b>R version 4.1.2 </b>')),
@@ -367,7 +367,7 @@ ui <- dashboardPage(
                               tags$br(),
                               
                               tags$div('class'="center",
-                                       h3(HTML('<b>C</b>hIP-seq and <b>A</b>TAC-seq <b>A</b>nalysis <b>T</b>ool'))
+                                       h3(HTML('<b>C</b>hIP-seq and <b>A</b>TAC-seq <b>P</b>eak calling and <b>P</b>rocessing <b>S</b>oftware'))
                                        )
                                       )
                                      ),
@@ -377,7 +377,7 @@ ui <- dashboardPage(
                               tags$br(),
                               tags$br(),
                               tags$div('class'="center",
-                                       h3(HTML('<b>C</b>hIP-seq and <b>A</b>TAC-seq <b>A</b>nalysis <b>T</b>ool'))
+                                       h3(HTML('<b>C</b>hIP-seq and <b>A</b>TAC-seq <b>P</b>eak calling and <b>P</b>rocessing <b>S</b>oftware'))
                                       )
                                      )
                                     )
