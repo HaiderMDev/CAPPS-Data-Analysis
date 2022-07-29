@@ -15,6 +15,9 @@ Pheatmap
 ## Table of Contents
 1. [Installation](#installation-and-launching-shiny-dashboard)
 2. [Sample Sheet Preparation](#sample-file-preparation)
+3. [Steps to Data Analysis](#steps-to-data-analysis)
+        1. [Load the Sample Sheet](#load-the-sample-sheet)
+        2. 
 
 &nbsp;
 &nbsp;
@@ -85,6 +88,9 @@ The sample file contains metadata on the following main items:
 #### **Step 1: Load the Sample Sheet**
 ---------------------
 
+Click on the browse button to load the sample sheet. The sample sheet, once loaded, will be displayed beside the control panel.
+
+![Terminal in Mac OS](./Images/SampleSheet.png)
 
 
 
