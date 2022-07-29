@@ -1,6 +1,6 @@
 
-app_name    = " CAPPS-DATA Analysis " 
-app_version = "Version 2.1"
+app_name    = " CAPPS-Data Analysis " 
+app_version = sprintf("R Version %s",getRversion())
 
 #Loading packages:
 library(shiny)
@@ -36,31 +36,22 @@ library(ggupset)
 ################# #################### #################### UI COMPONENT #################### #################### ####################
 ui <- dashboardPage(
     #This is setting the title of the application
-    dashboardHeader(title = paste(app_name,app_version, sep=" "), titleWidth=250),
+    dashboardHeader(title = paste(app_name, sep=" "), titleWidth=250),
     
     dashboardSidebar(width = 250,
                      
-         tags$style(".skin-blue .sidebar 
+         tags$style(".skin-purple .sidebar 
                a { 
                   color: #444; 
                }"),
+
                
-         tags$style(".skin-blue .sidebar 
-               a.sidebarlink:link, a.sidebarlink:visited { 
-                                    color: #FFF;
-               }"),
-         
-         tags$style(".skin-blue .sidebar
-                a.sidebarlink:hover {
-                                    color: #777;
-               }"),
-               
-         tags$style(".skin-blue .sidebar
+         tags$style(".skin-purple .sidebar
                 .center {
                         text-align: center;
                }"),
                
-         tags$style(".skin-blue .sidebar
+         tags$style(".skin-purple .sidebar
                 .borderbox {
                         border: 2px solid #666;
                         padding: 5px 5px 5px 5px;
@@ -75,9 +66,8 @@ ui <- dashboardPage(
                    tags$br(),
                    h3(HTML('<b>C</b>hIP-seq and <b>A</b>TAC-seq <b>P</b>eak calling and <b>P</b>rocessing <b>S</b>oftware')),
                    h5(HTML('<br><b>CAPPS</b> - <b>Data Analysis</b> is a tool designed for the visual analysis of <b>Ch</b>romatin <b>I</b>mmunopreci<b>P</b>itation <b>seq</b>uencing (ChIP-seq) \
-                              and <b>A</b>ssay for <b>T</b>ransposase <b>A</b>ccessible <b>C</b>hromatin <b>seq</b>uencing (ATAC-seq). This tool utilizes the DiffBind and \
-                              ChIPseeker packages for differential peak analysis and peak annotation, respectively.')),
-                   h4(HTML('<br><b>R version 4.1.2 </b>')),
+                              and <b>A</b>ssay for <b>T</b>ransposase <b>A</b>ccessible <b>C</b>hromatin <b>seq</b>uencing (ATAC-seq). ')),
+                   h4(app_version),
                    tags$br(),
                    tags$br(),
                    tags$br()),
@@ -426,7 +416,7 @@ ui <- dashboardPage(
                                   tags$h5(HTML('<b>PeakFormat:</b> BED')),
                                   tags$h5(HTML('<b>ScoreCol: </b> 5')),
                                   tags$h5(HTML('<b>LowerBetter: </b> FALSE')),
-                                  tags$h6("Please email me at hhassa3@uwo or hhassan4242@gmail.com if you require clarification.")
+                                  tags$h6("Please email me at haider.hassan@hoppesyler.com if you require clarification.")
                                  ))
                                 ),HTML('</p></div>')
                               ),
@@ -947,7 +937,7 @@ ui <- dashboardPage(
                             tags$h4("This software was designed using the R Shinny package. "),
                             tags$br(),
                             tags$br(),
-                            tags$h4("Please cite this software in your publication. If any questions, please contact me at hhassan4242@gmail.com. Thank you!"),
+                            tags$h4("Please cite this software in your publication. If any questions, please contact me at haider.hassan@hoppesyler.co. Thank you!"),
                             #HTML('</div>'),          #
                             HTML('</p></div>')
                            ),
@@ -969,7 +959,7 @@ ui <- dashboardPage(
                
 ),#end dashboardBody
        
-                     skin = "blue"
+                     skin = "purple"
 
 ) #end dashboard page 
 
@@ -996,14 +986,14 @@ shinyServer <- function(input, output, session) {
    output$control <- renderUI({
        samplesheet <- samplesheet()
        subset <- samplesheet %>% select(Condition)
-       selectInput("control", "Choose Control Condition", subset, selected = subset[1]) #select first unique output (which is WT)
+       selectInput("control", "Choose Control Condition", subset, selected = subset[[1]]) #select first unique output (which is WT)
     }
    )
    
    output$treatment <-renderUI ({
        samplesheet <- samplesheet()
        subset <- samplesheet %>% select(Condition)
-       selectInput("treatment", "Choose Treatment Condition", subset, selected = subset[1]) #select second unique output (which is KO)
+       selectInput("treatment", "Choose Treatment Condition", subset, selected = subset[[1]]) #select second unique output (which is KO)
     }
    )
    
@@ -2201,3 +2191,6 @@ shinyServer <- function(input, output, session) {
 
 
 shinyApp(ui = ui, server = shinyServer)
+
+
+

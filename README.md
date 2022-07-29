@@ -57,5 +57,38 @@ The **app.R** can be downloaded and opened in R-studios. Please download the **_
 ### **Sample File Preparation**
 ---------------------
 
+The sample file contains metadata on the following main items:
+
+ 1. Sample name and identification
+ 2. Condition (i.e. control sample and Sample with a treatment)
+ 3. Location of the binary assignment file (BAM)
+ 4. Location of the tab-delimted text file containing feature tracks
+ 
+ **_A pre-filled sample file is included in the GitHub page for reference. Additionally, an empty template is also included in the page. _**
+ 
+&nbsp;
+&ensp;
+&nbsp;
+&ensp; 
+ 
+### **Steps to Data Analysis**
+---------------------
+ **The following series of steps will outline the ways that CAPPS can be used for ChIP-seq or ATAC-seq data analysis.**
+
+> Before using CAPPS, please ensure that you run the `Required_Packages.R` file which will attempt to install packages that may be missing. 
+
+&nbsp;
+&ensp;
+&nbsp;
+&ensp;
+
+#### **Step 1: Load the Sample Sheet**
+---------------------
+
+
+
+
+
+
 
 
