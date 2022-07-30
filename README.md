@@ -161,7 +161,7 @@ The control panel also contains options to download the full table, or a table t
 
 This page contains some of the exploratory plots for sample correlation. These include the PCA, MA, heatmap and volcano plots. 
 
-![Exploratory plots](./Images/exploratory_plots)
+![Exploratory plots](./Images/exploratory_plots.png)
 
 
 &nbsp;
@@ -170,6 +170,6 @@ This page contains some of the exploratory plots for sample correlation. These i
 &ensp;
 
 
-#### ****
+#### **Gene Annotation**
 ---------------------
 
