@@ -20,6 +20,7 @@ Pheatmap
     2. [Experimental Settings](#experimental-settings)
     3. [Differential Peak Analysis](#differential-peak-analysis)
     4. [Sample Correlation Plots](#sample-correlation-plots)
+    5. [Pathways Analysis](#pathways-analysis)
 
 &nbsp;
 &nbsp;
@@ -188,7 +189,7 @@ The peaks can be filtered by FDR and regions with positive or negative fold chan
 &nbsp;
 &ensp;
 
-#### **Pathways analysis**
+#### **Pathways Analysis**
 ---------------------
 
 The pathways analysis can be performed using the **_KEGG_** or **_REACTOME_** databases. The pathways analysis for positive versus negative fold change regions are divided into separate tabs. Depending upon the database used, the plots generated will vary. After pathways analysis, the table with full pathway analysis and genes lists can be downloaded. 
