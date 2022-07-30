@@ -21,6 +21,8 @@ Pheatmap
     3. [Differential Peak Analysis](#differential-peak-analysis)
     4. [Sample Correlation Plots](#sample-correlation-plots)
     5. [Pathways Analysis](#pathways-analysis)
+    6. [Heatmap Plot](#heatmap-plot)
+    7. [Gene Specific Plots](#gene-specific-plots)
 
 &nbsp;
 &nbsp;
@@ -194,9 +196,40 @@ The peaks can be filtered by FDR and regions with positive or negative fold chan
 
 The pathways analysis can be performed using the **_KEGG_** or **_REACTOME_** databases. The pathways analysis for positive versus negative fold change regions are divided into separate tabs. Depending upon the database used, the plots generated will vary. After pathways analysis, the table with full pathway analysis and genes lists can be downloaded. 
 
-You can also vary the number of pathways that can be displayed on the plots. You have options to view the data in box, CNET, bar or heat plots.
+The number of pathways that are displayed in the plots can be varied.  Additionally, there are  options to view the data in box, CNET, bar or heat plots.
 
 
 ![Pathways analysis 1](./Images/pathways1.png)
 
 ![Pathways analysis 2](./Images/pathways2.png)
+
+&nbsp;
+&ensp;
+&nbsp;
+&ensp;
+
+#### **Heatmap Plot**
+---------------------
+
+This page is to view the heatmap performed on the differentially enriched regions. There are various options available for the heatmap plot, such as the algorithyms for hierarchial clustering, color schemes and clustering by rows and/or columns. 
+
+![Heatmap](./Images/Heatmap.png)
+
+&nbsp;
+&ensp;
+&nbsp;
+&ensp;
+
+#### **Gene Specific Plots**
+---------------------
+This page is designed to view bar graphs on gene(s) specific plots. This will provide the end user an idea if peaks near the gene(s) of interest are enriched or depleted relative to the control samples. The datatable that is filtered for the input gene list can be downloaded. 
+
+![Gene Specific Plots](./Images/genes.png)
+
+
+&nbsp;
+&ensp;
+&nbsp;
+&ensp;
+
+If you have any questions or recommendations for improvement, please send me an email (hhassan4242@gmail.com)
