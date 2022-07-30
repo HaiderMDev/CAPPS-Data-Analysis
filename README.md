@@ -139,8 +139,10 @@ The options in **_Advanced Settings_** tab are for manipulating settings for dif
 
 Maneuvering to this page initiates the differential peak analysis, peak annotation, and filtering. The output contains information on:
         - The number of differential enriched regions
-        - The number of peaks with psitive and negative fold enrichment relative to the control sample
-        - The number of peaks that meet p-value and FDR cutoffs. 
+        - The number of peaks with positive and negative fold enrichment relative to the control sample
+        - The number of peaks that meet p-value and FDR cutoffs.
+        - Genomic annotation of the peaks 
+        - Annotation of the nearest gene 
         
 ![Differetial peak anlaysis](./Images/Diff_Peak.png)
 
@@ -173,3 +175,27 @@ This page contains some of the exploratory plots for sample correlation. These i
 #### **Gene Annotation**
 ---------------------
 
+This page contains annotation for the differential enriched regions in the genome. The annotation was performed via the **_ChIPseeker package_**. 
+
+The peaks can be filtered by FDR and regions with positive or negative fold change enrichment relative to the control sample. 
+
+![Annotation](./Images/annotation.png)
+
+**_The help page provides information on the interpretation of the data. 
+
+&nbsp;
+&ensp;
+&nbsp;
+&ensp;
+
+#### **Pathways analysis**
+---------------------
+
+The pathways analysis can be performed using the **_KEGG_** or **_REACTOME_** databases. The pathways analysis for positive versus negative fold change regions are divided into separate tabs. Depending upon the database used, the plots generated will vary. After pathways analysis, the table with full pathway analysis and genes lists can be downloaded. 
+
+You can also vary the number of pathways that can be displayed on the plots. You have options to view the data in box, CNET, bar or heat plots.
+
+
+![Pathways analysis 1](./Images/pathways1.png)
+
+![Pathways analysis 2](./Images/pathways2.png)
