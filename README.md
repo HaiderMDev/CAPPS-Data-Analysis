@@ -16,10 +16,10 @@ Pheatmap
 1. [Installation](#installation-and-launching-shiny-dashboard)
 2. [Sample Sheet Preparation](#sample-file-preparation)
 3. [Steps to Data Analysis](#steps-to-data-analysis)
-        1. [Load the Sample Sheet](#load-the-sample-sheet)
-        2. [Experimental Settings](#experimental-settings)
-        3. [Differential Peak Analysis](#differential-peak-analysis)
-        4. [Sample Correlation Plots](#sample-correlation-plots)
+ 1. [Load the Sample Sheet](#load-the-sample-sheet)
+ 2. [Experimental Settings](#experimental-settings)
+ 3. [Differential Peak Analysis](#differential-peak-analysis)
+ 4. [Sample Correlation Plots](#sample-correlation-plots)
 
 &nbsp;
 &nbsp;
