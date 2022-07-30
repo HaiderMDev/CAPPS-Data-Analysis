@@ -149,7 +149,7 @@ Maneuvering to this page initiates the differential peak analysis, peak annotati
         
 ![Differetial peak anlaysis](./Images/Diff_Peak.png)
 
-nsp;
+
 &nbsp;
 &ensp;
 
@@ -184,7 +184,7 @@ The peaks can be filtered by FDR and regions with positive or negative fold chan
 
 ![Annotation](./Images/annotation.png)
 
-**_The help page provides information on the interpretation of the data. 
+**_The help page provides information on the interpretation of the data._**
 
 &nbsp;
 &ensp;
