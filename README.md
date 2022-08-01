@@ -72,7 +72,7 @@ The sample file contains metadata on the following main items:
  3. Location of the binary assignment file (BAM)
  4. Location of the tab-delimted text file containing feature tracks
  
- **_A pre-filled sample file is included in the GitHub page for reference. Additionally, an empty template is also included in the page. _**
+ **_A pre-filled sample file is included in the GitHub page for reference. Additionally, an empty template is also included in the page_**
  
 &nbsp;
 &ensp;
@@ -232,4 +232,3 @@ This page is designed to view bar graphs on gene(s) specific plots. This will pr
 &nbsp;
 &ensp;
 
-If you have any questions or recommendations for improvement, please send me an email (hhassan4242@gmail.com)
