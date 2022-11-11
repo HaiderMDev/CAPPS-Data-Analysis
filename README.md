@@ -1,4 +1,4 @@
-## **CAPPS Data Analysis Tool
+## CAPPS Data Analysis Tool
 
 This is a program for the analysis of ATAC-seq or ChIP-seq data in R. This package incorporates the following core packages for data analysis and visualization:
 ```
